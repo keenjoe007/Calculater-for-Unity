@@ -4,6 +4,7 @@ var partsNumbers = new Array();	//parts of targetsNum
 var targets = new Array();	//targets of operation
 var math = new Array();	// + or - or * or /
 var answer:int = 0;
+var labelText = "";
 
 
 /////////createButtons//////////
@@ -12,6 +13,7 @@ function OnGUI(){
 	var setNumButton = function(x,y,num){
 		if(GUI.Button(Rect(x,y,100,50),num.ToString())){
 			inputPartsNum(num);
+			textChange(num);
 		}
 	};
 	var setMathButton = function(y,mth){
@@ -20,6 +22,7 @@ function OnGUI(){
 				createTargetNum();
 				resetPartsNum();
 				inputMath(mth);
+	textChange(mth);
 			}else{
 				Debug.Log("you have no targets!");
 			}
@@ -59,7 +62,7 @@ function OnGUI(){
 	
 	setAnswerButton();
 	
-	GUI.Label(Rect(110,10,350,50),answer.ToString());
+	GUI.Label(Rect(110,10,350,50),labelText);
 }
 ////////////////////////////////////
 
@@ -72,6 +75,20 @@ function inputMath(mth){
 	math.Push(mth);
 }
 //////////////////////////////////
+
+////////labelControll////////////
+function textChange(txt){
+	if(answer==0){
+		labelText += txt.ToString();
+	}else{
+		labelText = txt.ToString();
+		answer = 0;
+	}
+}
+function calcResult(){
+	labelText = answer.ToString();
+}
+/////////////////////////////////
 
 /////////createTargets///////////
 function createTargetNum(){
@@ -86,7 +103,7 @@ function createTargetNum(){
 }
 /////////////////////////////////
 
-/////////resetArrays////////////
+/////////resetData////////////////
 function resetPartsNum(){
 	partsNumbers = new Array();
 }
@@ -113,5 +130,6 @@ function calculation(){
 		}
 	}
 	Debug.Log("answer is "+answer);
+	calcResult();
 }
 ////////////////////////////////////////////
