@@ -3,7 +3,7 @@
 var partsNumbers = new Array();	//parts of targetsNum
 var targets = new Array();	//targets of operation
 var math = new Array();	// + or - or * or /
-var answer:int = 0;
+var answer:float = 0;
 var labelText = "";
 
 
@@ -22,7 +22,7 @@ function OnGUI(){
 				createTargetNum();
 				resetPartsNum();
 				inputMath(mth);
-	textChange(mth);
+				textChange(mth);
 			}else{
 				Debug.Log("you have no targets!");
 			}
@@ -78,7 +78,7 @@ function inputMath(mth){
 
 ////////labelControll////////////
 function textChange(txt){
-	if(answer==0){
+	if(answer==0 && labelText!="0"){
 		labelText += txt.ToString();
 	}else{
 		labelText = txt.ToString();
@@ -120,7 +120,7 @@ function calculation(){
 	answer = targets[0];
 	for(var i=0;i<targets.length;i++){
 		if(targets.length>i+1){
-			var calcNum:int = targets[i+1];
+			var calcNum:float = targets[i+1];
 			switch(math[i]){
 				case "+":answer+=calcNum;break;
 				case "-":answer-=calcNum;break;
